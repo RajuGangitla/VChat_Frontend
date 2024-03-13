@@ -1,16 +1,24 @@
 import api from "@/lib/api"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 
 
 
 export const googleLoginApi = () => {
     return useMutation({
         mutationFn: () => api.get('auth/google'),
-        onSuccess: (data:any) => {
-            
+        onSuccess: (data: any) => {
         },
-        onError:()=>{
-            
+        onError: () => {
         },
     })
 };
+
+
+export const getUserApi = () => {
+    return useQuery({
+        queryKey: ['getUser'],
+        queryFn: async () => await api.get("users/getUserById"),
+        refetchOnMount:true,
+        refetchOnWindowFocus:false
+    })
+}

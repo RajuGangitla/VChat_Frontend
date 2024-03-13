@@ -1,7 +1,9 @@
-import Image from "next/image";
+import DashBoard from "@/components/DashBoard/Home";
+
 
 export default function Home() {
+
   return (
-    <p>Hiiiiii</p>
+    <DashBoard />
   );
 }
