@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
-import QueryProvider from "@/providers/QueryProvider";
-import NavBar from "@/components/DashBoard/NavBar";
+import MainLayout from "@/components/layout/main-layout";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 
 
@@ -25,12 +25,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={openSans.className}>
-				<QueryProvider>
-					<div className="min-h-full">
-						<NavBar />
-						{children}
-					</div>
-				</QueryProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<MainLayout children={children} />
+				</ThemeProvider>
 			</body>
 		</html>
 	);

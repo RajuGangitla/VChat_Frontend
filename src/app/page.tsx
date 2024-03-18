@@ -1,4 +1,4 @@
-import DashBoard from "@/components/DashBoard/Home";
+import DashBoard from "@/components/dashBoard/Home";
 
 
 export default function Home() {
