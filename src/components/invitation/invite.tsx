@@ -24,15 +24,14 @@ import { Loader2 } from "lucide-react";
 export default function InviteFriend() {
 
     const [emails, setEmails] = useState<Tag[]>([])
+    const [open, setOpen] = useState(false);
+
     const {
-        register,
-        control,
-        setValue,
         handleSubmit,
         formState: { errors },
     } = useForm<TInvitation>();
 
-    const { mutate: inviteFriends, isPending } = inviteFriendsApi()
+    const { mutate: inviteFriends, isPending } = inviteFriendsApi(setOpen, setEmails)
 
     const validateEmail = (email: string): boolean => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -50,6 +49,14 @@ export default function InviteFriend() {
                 invalidEmails.push(email);
             }
         });
+        if (validEmails.length === 0) {
+            toast({
+                title: "Email Required",
+                description: "Add atleast one email",
+                duration: 5000,
+            });
+            return;
+        }
         if (invalidEmails.length > 0) {
             toast({
                 title: "Invalid Emails",
@@ -60,12 +67,11 @@ export default function InviteFriend() {
         }
         data.invitees = validEmails;
         inviteFriends(data)
-        console.log(data, "data")
     });
 
     return (
         <>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen} >
                 <DialogTrigger asChild>
                     <Button variant="outline">Invite Friend</Button>
                 </DialogTrigger>

@@ -11,7 +11,7 @@ export default function ReusableInput({ control, name, required, type, placehold
                 control={control}
                 name={name}
                 rules={{
-                    ...(required && { required: `${name} is required` })
+                    ...(required && { required: `${name} is required` }),
                     ...validationRules
                 }}
                 render={({ field }) => (

@@ -2,7 +2,6 @@ import { BACKENDAPIS } from "@/api/routes";
 import api from "@/lib/api"
 import { TUser } from "@/types/user";
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { NextRouter } from "next/router";
 
 
 

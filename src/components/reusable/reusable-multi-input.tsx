@@ -35,6 +35,7 @@ export default function ReusableMultiInput({ tags, setTags, placeholder, disable
                     description: "Please enter a tag with more characters",
                     variant: "destructive",
                 });
+                return
             }
 
             const newTagId = uuidv4();
@@ -70,7 +71,7 @@ export default function ReusableMultiInput({ tags, setTags, placeholder, disable
                     onChange={handleInputChange}
                     placeholder={`Enter ${placeholder}`}
                     onKeyDown={handleKeyDown}
-                    disabled={disabled} 
+                    disabled={disabled}
                 />
             </div>
         </>
