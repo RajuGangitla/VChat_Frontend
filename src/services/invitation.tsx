@@ -9,7 +9,7 @@ import React from "react"
 
 
 
-export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<boolean>>, setEmails: React.Dispatch<React.SetStateAction<Tag[]>>) => {
+export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
     return useMutation({
         mutationFn: (data: TInvitation) => {
             return api.post(`${BACKENDAPIS.INVITE_FRIENDS}`, data)
@@ -19,7 +19,6 @@ export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<bo
                 title: "Invitation sent successfully"
             })
             setOpen(false)
-            setEmails([])
         },
         onError: (error: Error) => {
             toast({

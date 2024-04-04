@@ -2,9 +2,11 @@
 
 
 export type TInvitation = {
-    invitees: string[]
+    firstName: string
+    lastName: string
+    email: string
 }
 
 export type TEmail = {
-    
+
 }

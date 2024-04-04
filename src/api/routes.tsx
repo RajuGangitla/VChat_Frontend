@@ -1,5 +1,5 @@
 
 export enum BACKENDAPIS {
     GET_USER_BYID = "users/getUserById",
-    INVITE_FRIENDS = "users/inviteFriends"
+    INVITE_FRIENDS = "invitation/inviteFriends"
 }
