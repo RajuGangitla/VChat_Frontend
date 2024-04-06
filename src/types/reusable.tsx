@@ -1,14 +1,12 @@
+import { Control, FieldValues } from "react-hook-form"
 
 
-export interface IReusableInput {
-    control: any
-    name: string
-    required: boolean
+export interface IReusableInput<T extends FieldValues> {
+    control: Control<T>
+    name: keyof T
     type: string
     placeholder: string
-    validationRules?: Record<string, any>
 }
-
 
 export type Tag = {
     id: string;

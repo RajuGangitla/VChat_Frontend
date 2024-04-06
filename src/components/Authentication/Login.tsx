@@ -3,7 +3,6 @@
 import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { googleLoginApi } from "@/services/login"
 import Image from "next/image"
 
 
@@ -25,11 +24,11 @@ export default function Login() {
                     <div className="p-6 md:p-20">
                         <p className="text-center font-semibold tracking-wide text-3xl max-w-5xl my-6">Welcome Back to V-Chat</p>
                         <p className="mx-auto text-center font-normal text-xl max-w-sm my-12">Login to enjoy chatting and connecting with others</p>
-                        
+
 
                         <form action="http://localhost:8000/api/auth/google" method="get">
                             <Button variant="default" type="submit" className="w-full bg-black text-white text-base hover:bg-opacity-80 duration-200">
-                               <Image src={"/google.png"} alt={"google"} className="mr-2" width={30} height={30} />
+                                <Image src={"/google.png"} alt={"google"} className="mr-2" width={30} height={30} />
                                 Continue with Google
 
                             </Button>

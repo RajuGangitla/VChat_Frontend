@@ -1,4 +1,4 @@
-import { BACKENDAPIS } from "@/api/routes";
+import { BACKENDAPIS } from "@/routes/routes";
 import api from "@/lib/api"
 import { TUser } from "@/types/user";
 import { useMutation, useQuery } from "@tanstack/react-query"

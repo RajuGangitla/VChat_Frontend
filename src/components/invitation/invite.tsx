@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -9,13 +10,11 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { TInvitation } from "@/types/invitation";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { InvitationSchema, TInvitationFormValues } from "@/types/invitation";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReusableFormRow from "../reusable/reusable-formrow";
-import ReusableMultiInput from "../reusable/reusable-multi-input";
-import { Tag } from "@/types/reusable";
-import { toast } from "../ui/use-toast";
 import { inviteFriendsApi } from "@/services/invitation";
 import { Loader2 } from "lucide-react";
 import ReusableInput from "../reusable/reusable-input";
@@ -24,25 +23,25 @@ import ReusableInput from "../reusable/reusable-input";
 
 export default function InviteFriend() {
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     const {
         control,
         handleSubmit,
-        getValues,
+        reset,
         formState: { errors },
-    } = useForm<TInvitation>();
+    } = useForm<TInvitationFormValues>({
+        resolver: zodResolver(InvitationSchema),
+        mode: "onChange",
+    });
 
-    const { mutate: inviteFriends, isPending } = inviteFriendsApi(setOpen)
+    const { mutate: inviteFriends, isPending } = inviteFriendsApi(setOpen, reset)
 
-    const validateEmail = (email: string): boolean => {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(email);
-    };
 
-    const onSubmit = handleSubmit((data: TInvitation) => {
+    const onSubmit = handleSubmit((data: TInvitationFormValues) => {
         inviteFriends(data)
     });
+
 
     return (
         <>
@@ -69,19 +68,11 @@ export default function InviteFriend() {
                                 required={true}
                                 errors={errors.firstName}
                             >
-                                <ReusableInput
+                                <ReusableInput<TInvitationFormValues>
                                     control={control}
                                     name={"firstName"}
-                                    required={true}
                                     type={"text"}
                                     placeholder={"Enter First Name"}
-                                    validationRules={{
-                                        required: "first Name is required.",
-                                        minLength: {
-                                            value: 3,
-                                            message: "minimum length of first Name must be 3",
-                                        },
-                                    }}
                                 />
                             </ReusableFormRow>
                             <ReusableFormRow
@@ -90,19 +81,11 @@ export default function InviteFriend() {
                                 required={true}
                                 errors={errors.lastName}
                             >
-                                <ReusableInput
+                                <ReusableInput<TInvitationFormValues>
                                     control={control}
                                     name={"lastName"}
-                                    required={true}
                                     type={"text"}
                                     placeholder={"Enter Last Name"}
-                                    validationRules={{
-                                        required: "last Name is required.",
-                                        minLength: {
-                                            value: 3,
-                                            message: "minimum length of last Name must be 3",
-                                        },
-                                    }}
                                 />
                             </ReusableFormRow>
                             <ReusableFormRow
@@ -111,10 +94,9 @@ export default function InviteFriend() {
                                 required={true}
                                 errors={errors.email}
                             >
-                                <ReusableInput
+                                <ReusableInput<TInvitationFormValues>
                                     control={control}
                                     name={"email"}
-                                    required={true}
                                     type={"email"}
                                     placeholder={"Enter email"}
                                 />

@@ -1,4 +1,4 @@
-import { BACKENDAPIS } from "@/api/routes"
+import { BACKENDAPIS } from "@/routes/routes"
 import { toast } from "@/components/ui/use-toast"
 import api from "@/lib/api"
 import { TInvitation } from "@/types/invitation"
@@ -9,7 +9,7 @@ import React from "react"
 
 
 
-export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
+export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<boolean>>, reset: any) => {
     return useMutation({
         mutationFn: (data: TInvitation) => {
             return api.post(`${BACKENDAPIS.INVITE_FRIENDS}`, data)
@@ -18,11 +18,13 @@ export const inviteFriendsApi = (setOpen: React.Dispatch<React.SetStateAction<bo
             toast({
                 title: "Invitation sent successfully"
             })
+            reset()
             setOpen(false)
         },
-        onError: (error: Error) => {
+        onError: (error: any) => {
             toast({
-                title: error.message
+                title: error.response.data.message,
+                variant: "destructive"
             })
         },
     })
