@@ -26,11 +26,10 @@ export default function Login() {
                         <p className="mx-auto text-center font-normal text-xl max-w-sm my-12">Login to enjoy chatting and connecting with others</p>
 
 
-                        <form action="http://localhost:8000/api/auth/google" method="get">
-                            <Button variant="default" type="submit" className="w-full bg-black text-white text-base hover:bg-opacity-80 duration-200">
+                        <form action={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`} method="get">
+                            <Button variant="default" type="submit" className="w-full bg-black text-white text-base border-2">
                                 <Image src={"/google.png"} alt={"google"} className="mr-2" width={30} height={30} />
                                 Continue with Google
-
                             </Button>
                         </form>
                     </div>

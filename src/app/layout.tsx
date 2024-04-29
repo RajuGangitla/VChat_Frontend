@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import MainLayout from "@/components/layout/main-layout";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import QueryProvider from "@/providers/queryprovider";
 
 
 
@@ -31,7 +32,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<MainLayout children={children} />
+					<QueryProvider>
+						<MainLayout children={children} />
+					</QueryProvider>
 				</ThemeProvider>
 			</body>
 		</html>
